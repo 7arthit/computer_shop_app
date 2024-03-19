@@ -12,7 +12,7 @@ class ImageScreenPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: GestureDetector(
         onTap: () {
           Navigator.pop(context);
