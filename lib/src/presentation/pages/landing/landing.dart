@@ -16,7 +16,7 @@ class LandingPage extends StatelessWidget {
 
     return const Scaffold(
       body: Center(
-        child: Center(child: CircularProgressIndicator(color: AppTheme.blue)),
+        child: Center(child: CircularProgressIndicator(color: AppTheme.red)),
       ),
     );
   }

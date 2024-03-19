@@ -14,7 +14,7 @@ class CustomSearchAppBar extends StatelessWidget
     this.iconActions,
     this.iconBackWidth = 28,
     this.iconBackColor = Colors.white,
-    this.color = AppTheme.blue,
+    this.color = AppTheme.red,
     this.onSearchChanged,
     this.onClear,
   });

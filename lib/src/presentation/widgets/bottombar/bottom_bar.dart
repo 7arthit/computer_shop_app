@@ -27,7 +27,7 @@ class BottomBar extends StatelessWidget {
               currentIndex: state.menuItems.indexWhere((item) {
                 return item.menu == state.current;
               }),
-              selectedItemColor: AppTheme.blue,
+              selectedItemColor: AppTheme.red,
               unselectedItemColor: Colors.grey,
               selectedFontSize: 16,
               unselectedFontSize: 16,
@@ -61,7 +61,7 @@ class BottomBar extends StatelessWidget {
       return Icon(
         Icons.home,
         color: state.current == BottomMenu.home
-            ? AppTheme.blue
+            ? AppTheme.red
             : Colors.grey,
       );
     }
@@ -70,7 +70,7 @@ class BottomBar extends StatelessWidget {
       return Icon(
         Icons.person,
         color: state.current == BottomMenu.profile
-            ? AppTheme.blue
+            ? AppTheme.red
             : Colors.grey,
       );
     }

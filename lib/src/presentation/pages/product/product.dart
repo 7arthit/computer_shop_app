@@ -19,7 +19,7 @@ class ProductPage extends StatelessWidget {
           body: BlocBuilder<ProductCubit, ProductState>(
             builder: (context, state) {
               return state.isLoading
-                  ? const Center(child: CircularProgressIndicator(color: AppTheme.blue))
+                  ? const Center(child: CircularProgressIndicator(color: AppTheme.red))
                   : state.products.isEmpty
                   ? _message()
                   : ProductList(products: state.products);
