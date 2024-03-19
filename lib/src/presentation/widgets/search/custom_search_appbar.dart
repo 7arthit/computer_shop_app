@@ -14,7 +14,7 @@ class CustomSearchAppBar extends StatelessWidget
     this.iconActions,
     this.iconBackWidth = 28,
     this.iconBackColor = Colors.white,
-    this.color = AppTheme.blue,
+    this.color = AppTheme.red,
     this.onSearchChanged,
     this.onClear,
   });
@@ -69,11 +69,24 @@ class CustomSearchAppBar extends StatelessWidget
           fontSize: sizeFontWithDesityForDisplay(context, 20),
         ),
       ),
+      actions: canActions ? iconActions : [
+        Container(
+          margin: const EdgeInsets.only(right: 14.0),
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppTheme.white,
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.shopping_cart_outlined, size: 26),
+            onPressed: () {},
+            color: AppTheme.red,
+          ),
+        ),
+      ],
       centerTitle: true,
       backgroundColor: color,
       foregroundColor: Colors.transparent,
       elevation: 0.0,
-      actions: canActions ? iconActions : null,
     );
   }
 
