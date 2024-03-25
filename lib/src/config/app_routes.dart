@@ -1,3 +1,6 @@
+import 'package:computer_shop_app/src/presentation/pages/auth/auth.dart';
+import 'package:computer_shop_app/src/presentation/pages/login/bloc/login_cubit.dart';
+import 'package:computer_shop_app/src/presentation/pages/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:computer_shop_app/src/utils/injection.dart';
@@ -13,6 +16,8 @@ import 'package:computer_shop_app/src/presentation/widgets/bottombar/bloc/bottom
 class RouteNames {
   static const String landing = "/";
   static const String app = "/app";
+  static const String auth = "/auth";
+  static const String login = "/login";
   static const String home = "/home";
   static const String profile = "/profile";
 }
@@ -20,6 +25,8 @@ class RouteNames {
 final routes = <String, WidgetBuilder>{
   RouteNames.landing: (context) => const LandingPage(),
   RouteNames.app: (context) => const AppPage(),
+  RouteNames.auth: (context) => const AuthPage(),
+  RouteNames.login: (context) => const LoginPage(),
   RouteNames.home: (context) => const ProductPage(),
   RouteNames.profile: (context) => const ProfilePage(),
 };
@@ -27,4 +34,5 @@ final routes = <String, WidgetBuilder>{
 final providers = <SingleChildWidget>[
   BlocProvider(create: (context) => getIt<BottomBarCubit>()),
   BlocProvider(create: (context) => getIt<ProductCubit>()),
+  BlocProvider(create: (context) => getIt<LoginCubit>()),
 ];
