@@ -27,6 +27,7 @@ class BottomBar extends StatelessWidget {
               currentIndex: state.menuItems.indexWhere((item) {
                 return item.menu == state.current;
               }),
+              backgroundColor: AppTheme.white,
               selectedItemColor: AppTheme.red,
               unselectedItemColor: Colors.grey,
               selectedFontSize: 16,
