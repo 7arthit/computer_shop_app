@@ -1,3 +1,4 @@
+import 'package:computer_shop_app/src/config/app_storage.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -19,8 +20,12 @@ class DataProductRepository extends ProductRepository {
   @override
   Future<Either<Failure, List<Product>>> getProductList() async {
     try {
-      final response = await _client.product();
-      return Right(response.data.data);
+      final token = await AppStorage.shared.getToken();
+        final response = await _client.product(
+          accessToken: "Bearer $token",
+          page_size: 2000,
+        );
+        return Right(response.data.data);
     } on NotFoundException {
       return const Left(Failure(message: "occurred error!"));
     } on DioException catch (e) {

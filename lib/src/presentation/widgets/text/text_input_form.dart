@@ -21,7 +21,7 @@ class TextInputForm extends StatelessWidget {
     this.maxLength,
     this.showCursor = true,
     this.readOnly = false,
-    this.style = const TextStyle(fontSize: 24, color: Colors.black),
+    this.style = const TextStyle(fontSize: 20, color: Colors.black),
     this.labelStyle,
     this.hintStyle,
     this.errorStyle,

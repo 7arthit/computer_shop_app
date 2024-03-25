@@ -143,7 +143,7 @@ class ProductDetailPage extends StatelessWidget {
           child: Text(
             product.name,
             style: const TextStyle(
-              fontSize: 24.0,
+              fontSize: 22.0,
               fontWeight: FontWeight.bold,
             ),
           ),
