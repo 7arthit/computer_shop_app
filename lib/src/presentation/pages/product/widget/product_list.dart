@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:computer_shop_app/src/presentation/widgets/text/text_input_form.dart';
+import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:computer_shop_app/src/domain/entities/product/product.dart';
@@ -15,17 +19,102 @@ class ProductList extends StatefulWidget {
 class _ProductListState extends State<ProductList> {
   String? selectedCategory;
   bool isListView = true;
+  String? searchQuery;
+  FocusNode? _searchFocusNode;
+  String? onSearchChanged;
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _searchFocusNode = FocusNode();
+
+  }
+
+  @override
+  void dispose() {
+    _searchFocusNode?.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        _typeSearch(),
         _typeMenu(),
         Expanded(
           child: _productList(),
         ),
       ],
+    );
+  }
+
+  double sizeFontWithDesityForDisplay(BuildContext context, double size) {
+    Size mediaSize = MediaQuery.of(context).size;
+    double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    double aspectRatio = mediaSize.aspectRatio;
+    double font = ((size + 5) / (devicePixelRatio)) / aspectRatio;
+    if (Platform.isIOS) {
+      return aspectRatio > 0.5 ? size : font;
+    } else {
+      return size * .90;
+    }
+  }
+
+  Widget _typeSearch() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppTheme.red,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          const SizedBox(width: 8),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextInputForm(
+                controller: controller,
+                icon: const Icon(Icons.search, color: Colors.grey),
+                onChanged: (searchText) {
+                  setState(() {
+                    searchQuery = controller.text;
+                  });
+                },
+                suffixIcon: searchQuery != null && searchQuery!.isNotEmpty ? IconButton( // Using null-aware and condition
+                  onPressed: () {
+                    setState(() {
+                      controller.clear();
+                      searchQuery = '';
+                    });
+                  },
+                  icon: const Icon(Icons.cancel, color: Colors.grey),
+                ) : null,
+                hintText: 'ค้นหาสินค้า',
+                hintStyle: TextStyle(
+                  fontSize: sizeFontWithDesityForDisplay(context, 20),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Container(
+            margin: const EdgeInsets.only(right: 14.0),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppTheme.white,
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart_outlined, size: 26),
+              onPressed: () {},
+              color: AppTheme.red,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -65,7 +154,7 @@ class _ProductListState extends State<ProductList> {
                     'Bundle Pack',
                     'Combo Set',
                   ].map(
-                    (String value) {
+                        (String value) {
                       return PopupMenuItem<String>(
                         value: value,
                         child: Text(value,
@@ -84,10 +173,11 @@ class _ProductListState extends State<ProductList> {
             ),
           ),
         ),
-        _viewListViwe()
+        _viewListViwe(),
       ],
     );
   }
+
 
   Widget _viewListViwe() {
     return Row(
@@ -112,6 +202,7 @@ class _ProductListState extends State<ProductList> {
 
   Widget _productList() {
     List<Product> filteredProducts = [];
+
     if (selectedCategory == null || selectedCategory == 'ทั้งหมด') {
       filteredProducts = widget.products;
     } else {
@@ -120,144 +211,149 @@ class _ProductListState extends State<ProductList> {
           .toList();
     }
 
+    if (searchQuery != null && searchQuery!.isNotEmpty) {
+      filteredProducts = filteredProducts.where((product) =>
+          product.name.toLowerCase().contains(searchQuery!.toLowerCase())).toList();
+    }
+
     return filteredProducts.isEmpty
         ? _message()
         : isListView
-            ? ListView.builder(
-                itemCount: filteredProducts.length,
-                itemBuilder: (context, index) {
-                  final product = filteredProducts[index];
-                  return InkWell(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ProductDetailPage(product: product),
-                        ),
-                      );
-                    },
-                    child: Card(
-                      color: Colors.white,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 16.0),
-                      elevation: 0,
-                      child: ListTile(
-                        leading: Image.network(
-                          product.image,
-                          width: 60.0,
-                          height: 60.0,
-                          fit: BoxFit.cover,
-                          errorBuilder: (
-                            BuildContext context,
-                            Object exception,
-                            StackTrace? stackTrace,
-                          ) {
-                            return Container(
-                              width: 60.0,
-                              height: 60.0,
-                              color: Colors.white,
-                            );
-                          },
-                        ),
-                        title: Text(
-                          product.name,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        subtitle: Text(
-                          '฿${product.unitPrice.toString().replaceAllMapped(
-                                RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                (Match m) => '${m[1]},',
-                              )}',
-                          style: const TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
+        ? ListView.builder(
+      itemCount: filteredProducts.length,
+      itemBuilder: (context, index) {
+        final product = filteredProducts[index];
+        return InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ProductDetailPage(product: product),
+              ),
+            );
+          },
+          child: Card(
+            color: Colors.white,
+            margin: const EdgeInsets.symmetric(
+                vertical: 8.0, horizontal: 16.0),
+            elevation: 0,
+            child: ListTile(
+              leading: Image.network(
+                product.image,
+                width: 60.0,
+                height: 60.0,
+                fit: BoxFit.cover,
+                errorBuilder: (
+                    BuildContext context,
+                    Object exception,
+                    StackTrace? stackTrace,
+                    ) {
+                  return Container(
+                    width: 60.0,
+                    height: 60.0,
+                    color: Colors.white,
                   );
                 },
-              )
-            : GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
+              ),
+              title: Text(
+                product.name,
+                style: const TextStyle(fontSize: 16),
+              ),
+              subtitle: Text(
+                '฿${product.unitPrice.toString().replaceAllMapped(
+                  RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                      (Match m) => '${m[1]},',
+                )}',
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
                 ),
-                itemCount: filteredProducts.length,
-                itemBuilder: (context, index) {
-                  final product = filteredProducts[index];
-                  return InkWell(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ProductDetailPage(product: product),
-                        ),
-                      );
-                    },
-                    child: Card(
+              ),
+            ),
+          ),
+        );
+      },
+    )
+        : GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 8.0,
+      ),
+      itemCount: filteredProducts.length,
+      itemBuilder: (context, index) {
+        final product = filteredProducts[index];
+        return InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ProductDetailPage(product: product),
+              ),
+            );
+          },
+          child: Card(
+            color: Colors.white,
+            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            elevation: 0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.network(
+                  product.image,
+                  width: double.infinity,
+                  height: 80.0,
+                  fit: BoxFit.contain,
+                  errorBuilder: (
+                      BuildContext context,
+                      Object exception,
+                      StackTrace? stackTrace,
+                      ) {
+                    return Container(
+                      width: double.infinity,
+                      height: 120.0,
                       color: Colors.white,
-                      margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                      elevation: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.network(
-                            product.image,
-                            width: double.infinity,
-                            height: 120.0,
-                            fit: BoxFit.contain,
-                            errorBuilder: (
-                              BuildContext context,
-                              Object exception,
-                              StackTrace? stackTrace,
-                            ) {
-                              return Container(
-                                width: double.infinity,
-                                height: 120.0,
-                                color: Colors.white,
-                              );
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  product.name.length > 23
-                                      ? '${product.name.substring(0, 23)}...'
-                                      : product.name,
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                                Text(
-                                  '฿${product.unitPrice.toString().replaceAllMapped(
-                                        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                                        (Match m) => '${m[1]},',
-                                      )}',
-                                  style: const TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.name.length > 23
+                            ? '${product.name.substring(0, 23)}...'
+                            : product.name,
+                        style: const TextStyle(fontSize: 16),
                       ),
-                    ),
-                  );
-                },
-              );
+                      Text(
+                        '฿${product.unitPrice.toString().replaceAllMapped(
+                          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                              (Match m) => '${m[1]},',
+                        )}',
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget _message() {
@@ -270,7 +366,7 @@ class _ProductListState extends State<ProductList> {
           Icon(Icons.error_outline, color: Colors.grey, size: 32),
           SizedBox(width: 10, height: 10),
           Text(
-            'ไม่มีสินค้าในประเภทนี้',
+            'ไม่พบสินค้า',
             style: TextStyle(fontSize: 20, color: Colors.grey),
           ),
         ],
