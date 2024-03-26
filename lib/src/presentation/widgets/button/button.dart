@@ -57,7 +57,6 @@ class Button extends StatelessWidget {
         TextLabel(
           text: text,
           fontSize: fontSize,
-          fontWeight: fontWeight ?? FontWeight.bold,
           textAlign: TextAlign.center,
           color: textColor ?? Colors.white,
         ),

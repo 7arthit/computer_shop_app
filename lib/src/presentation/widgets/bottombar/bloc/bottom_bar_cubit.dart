@@ -7,7 +7,7 @@ import 'package:computer_shop_app/src/presentation/widgets/bottombar/models/bott
 part 'bottom_bar_state.dart';
 
 List<BottomBarItem> menuItems = [
-  BottomBarItem(BottomMenu.home, 'หน้าหลัก'),
+  BottomBarItem(BottomMenu.home, 'รายการ'),
   BottomBarItem(BottomMenu.profile, 'โปรไฟล์'),
 ];
 

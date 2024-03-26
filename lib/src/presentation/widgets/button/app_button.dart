@@ -30,8 +30,8 @@ class AppButton {
     ),
   );
 
-  static ButtonStyle cctvButtonStyle = ElevatedButton.styleFrom(
-    backgroundColor: AppTheme.greenLight20,
+  static ButtonStyle loginButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: AppTheme.white,
     shadowColor: AppTheme.transparent,
     padding: const EdgeInsets.symmetric(horizontal: 8),
     shape: const RoundedRectangleBorder(

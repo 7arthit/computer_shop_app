@@ -1,3 +1,9 @@
+import 'package:computer_shop_app/src/data/data_models/request/login_request.dart';
+import 'package:computer_shop_app/src/data/data_models/request/search_request.dart';
+import 'package:computer_shop_app/src/data/data_models/response/login_response.dart';
+import 'package:computer_shop_app/src/data/data_models/response/product_type_response.dart';
+import 'package:computer_shop_app/src/data/data_models/response/role_drop_downs_response.dart';
+import 'package:computer_shop_app/src/data/data_models/response/search_response.dart';
 import 'package:dio/dio.dart' hide Headers;
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -20,5 +26,27 @@ abstract class RestClient {
   factory RestClient(@FactoryMethod() Dio dio) = _RestClient;
 
   @GET(ApiPath.products)
-  Future<HttpResponse<ApiResponse<List<ProductResponse>>>> product();
+  Future<HttpResponse<ApiResponse<List<ProductResponse>>>> product({
+    @Header("Authorization") required String accessToken,
+    @Query("page_size") required int page_size,
+  });
+
+  @GET(ApiPath.roledropdowns)
+  Future<HttpResponse<ApiResponse<List<RoleDropDownsResponse>>>> roleDropDowns();
+
+  @POST(ApiPath.login)
+  Future<HttpResponse<LoginResponse>> login({
+    @Body() required LoginRequest form,
+  });
+
+  @POST(ApiPath.search)
+  Future<HttpResponse<ApiResponse<SearchResponse>>> searchs({
+    @Header("Authorization") required String accessToken,
+    @Body() required SearchRequest form,
+  });
+
+  @GET(ApiPath.productstype)
+  Future<HttpResponse<ApiResponse<List<ProductTypeResponse>>>> productType({
+    @Header("Authorization") required String accessToken,
+  });
 }
