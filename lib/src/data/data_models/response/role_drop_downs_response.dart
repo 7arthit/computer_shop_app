@@ -1,4 +1,4 @@
-import 'package:computer_shop_app/src/domain/entities/role_drop_downs/role_drop_downs.dart';
+import 'package:computer_shop_app/src/domain/entities/role/role_drop_downs.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'role_drop_downs_response.g.dart';

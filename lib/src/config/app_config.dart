@@ -3,7 +3,9 @@ class AppConfig {
 }
 
 class ApiPath {
-  static const String products = "/products";
-  static const String roledropdowns = "/common/getRoleDropDowns";
   static const String login = "/authentication/login";
+  static const String roledropdowns = "/common/getRoleDropDowns";
+  static const String products = "/products";
+  static const String search = "/products/search";
+  static const String productstype = "/dropDowns/productType";
 }

@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:computer_shop_app/src/config/app_routes.dart';
 import 'package:computer_shop_app/src/config/app_storage.dart';
 import 'package:computer_shop_app/src/presentation/pages/login/bloc/login_cubit.dart';
 import 'package:computer_shop_app/src/presentation/widgets/appbar/custom_appbar.dart';
 import 'package:computer_shop_app/src/presentation/widgets/text/text_label.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

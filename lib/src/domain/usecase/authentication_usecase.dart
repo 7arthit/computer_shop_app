@@ -1,6 +1,6 @@
 import 'package:computer_shop_app/src/data/data_sources/helper/failure.dart';
 import 'package:computer_shop_app/src/domain/entities/login/login.dart';
-import 'package:computer_shop_app/src/domain/entities/role_drop_downs/role_drop_downs.dart';
+import 'package:computer_shop_app/src/domain/entities/role/role_drop_downs.dart';
 import 'package:computer_shop_app/src/domain/repositories/authentication_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
