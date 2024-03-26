@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:computer_shop_app/src/presentation/pages/product/widget/product_Image_screen.dart';
+import 'package:computer_shop_app/src/presentation/widgets/button/app_button.dart';
+import 'package:computer_shop_app/src/presentation/widgets/button/button.dart';
+import 'package:computer_shop_app/src/presentation/pages/product/widget/product_Image.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:computer_shop_app/src/domain/entities/product/product.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final Product product;
+  final Product? product;
 
   const ProductDetailPage({Key? key, required this.product}) : super(key: key);
 
@@ -15,7 +17,6 @@ class ProductDetailPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: _appbar(context),
       body: _body(context),
-      floatingActionButton: _addProductToCart(context),
     );
   }
 
@@ -36,32 +37,13 @@ class ProductDetailPage extends StatelessWidget {
             color: AppTheme.red,
           ),
           child: IconButton(
-            icon: const Icon(Icons.arrow_back, size: 28),
+            icon: const Icon(Icons.chevron_left, size: 28),
             onPressed: () {
               Navigator.pop(context);
             },
             color: AppTheme.white,
           ),
         ),
-        actions: [
-          _appBarAction(Icons.share_outlined, () {}),
-          _appBarAction(Icons.shopping_cart_outlined, () {}),
-        ],
-      ),
-    );
-  }
-
-  Widget _appBarAction(IconData iconData, VoidCallback onPressed) {
-    return Container(
-      margin: const EdgeInsets.only(right: 10.0),
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppTheme.red,
-      ),
-      child: IconButton(
-        icon: Icon(iconData, size: 26),
-        onPressed: onPressed,
-        color: AppTheme.white,
       ),
     );
   }
@@ -73,12 +55,12 @@ class ProductDetailPage extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              _fullImageScreen(context, product.image);
+              _fullImageScreen(context, product?.image);
             },
             child: Hero(
-              tag: 'product_image_${product.id}',
+              tag: 'product_image_${product?.id}',
               child: Image.network(
-                product.image,
+                product!.image,
                 fit: BoxFit.contain,
               ),
             ),
@@ -90,7 +72,7 @@ class ProductDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '฿${product.unitPrice.toString().replaceAllMapped(
+                '฿${product?.unitPrice.toString().replaceAllMapped(
                       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                       (Match m) => '${m[1]},',
                     )}',
@@ -104,12 +86,12 @@ class ProductDetailPage extends StatelessWidget {
               _likeProduct(),
               const SizedBox(height: 4.0),
               Text(
-                'จำนวน ${product.stock} ชิ้น',
+                'จำนวน ${product?.stock} ชิ้น',
                 style: const TextStyle(fontSize: 22.0, color: Colors.red),
               ),
               const SizedBox(height: 4.0),
               Text(
-                'ประเภทสินค้า  |  ${product.productType.name}',
+                'ประเภทสินค้า  |  ${product?.productType.name}',
                 style: const TextStyle(
                   fontSize: 22.0,
                 ),
@@ -124,11 +106,13 @@ class ProductDetailPage extends StatelessWidget {
               ),
               const SizedBox(height: 2.0),
               Text(
-                product.description.trim(),
+                product!.description.trim(),
                 style: const TextStyle(
                   fontSize: 18.0,
                 ),
               ),
+              const SizedBox(height: 20.0),
+              _addProduct()
             ],
           ),
         ),
@@ -141,35 +125,28 @@ class ProductDetailPage extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            product.name,
+            product!.name,
             style: const TextStyle(
-              fontSize: 22.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        const Icon(Icons.favorite_border, color: Colors.red),
       ],
     );
   }
 
-  Widget _addProductToCart(BuildContext context) {
-    return FloatingActionButton.extended(
+  Widget _addProduct() {
+    return Button(
+      text: "เลือกสินค้า",
+      style: AppButton.defaultButtonStyle,
       onPressed: () {},
-      icon: const Icon(Icons.add_shopping_cart_outlined,
-          color: Colors.white, size: 18),
-      label: const Text(
-        'หยิบใส่ตะกร้า',
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      ),
-      backgroundColor: AppTheme.red,
-      elevation: 0.5,
     );
   }
 
   Future<void> _fullImageScreen(BuildContext context, imageUrl) async {
     await Navigator.of(context).push(MaterialPageRoute<String>(
-      builder: (context) => ImageScreenPage(context, imageUrl: imageUrl),
+      builder: (context) => ProductImage(context, imageUrl: imageUrl),
       fullscreenDialog: true,
     ));
   }
