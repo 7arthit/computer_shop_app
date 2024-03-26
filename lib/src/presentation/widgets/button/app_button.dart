@@ -4,7 +4,7 @@ import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 class AppButton {
 
   static ButtonStyle defaultButtonStyle = ElevatedButton.styleFrom(
-    backgroundColor: AppTheme.blue,
+    backgroundColor: AppTheme.red,
     minimumSize: const Size.fromHeight(40),
     padding: const EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
@@ -30,8 +30,8 @@ class AppButton {
     ),
   );
 
-  static ButtonStyle cctvButtonStyle = ElevatedButton.styleFrom(
-    backgroundColor: AppTheme.greenLight20,
+  static ButtonStyle loginButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: AppTheme.white,
     shadowColor: AppTheme.transparent,
     padding: const EdgeInsets.symmetric(horizontal: 8),
     shape: const RoundedRectangleBorder(

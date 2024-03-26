@@ -1,10 +1,11 @@
-import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:computer_shop_app/src/presentation/pages/product/bloc/product_cubit.dart';
+import 'package:computer_shop_app/src/presentation/pages/product/widget/product_search.dart';
 import 'package:computer_shop_app/src/presentation/pages/product/widget/product_list.dart';
 import 'package:computer_shop_app/src/presentation/widgets/search/custom_search_appbar.dart';
-import 'package:computer_shop_app/src/presentation/pages/product/bloc/product_cubit.dart';
+import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({Key? key}) : super(key: key);
@@ -12,39 +13,32 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: context.read<ProductCubit>().loadProducts(),
+      future: context.read<ProductCubit>().getDataList(),
       builder: (context, snapshot) {
         return Scaffold(
+          backgroundColor: AppTheme.white,
           appBar: CustomSearchAppBar(),
-          body: BlocBuilder<ProductCubit, ProductState>(
-            builder: (context, state) {
-              return state.isLoading
-                  ? const Center(child: CircularProgressIndicator(color: AppTheme.blue))
-                  : state.products.isEmpty
-                  ? _message()
-                  : ProductList(products: state.products);
-            },
+          body: Stack(
+            children: <Widget>[
+              _body(),
+            ],
           ),
         );
       },
     );
   }
 
-  Widget _message() {
-    return Container(
-      alignment: Alignment.center,
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(Icons.error_outline, color: Colors.grey, size: 32),
-          SizedBox(width: 10, height: 10),
-          Text(
-            'ไม่มีการแจ้งเตือน',
-            style: TextStyle(fontSize: 20, color: Colors.grey),
-          ),
-        ],
-      ),
+  Widget _body() {
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (BuildContext context, ProductState state) {
+        if (!state.canSearch) {
+          return const ProductList();
+        } else {
+          return state.showProducts
+              ? const ProductList()
+              : const ProductSearch();
+        }
+      },
     );
   }
 }

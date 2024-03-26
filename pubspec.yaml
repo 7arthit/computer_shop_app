@@ -65,6 +65,9 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  assets:
+    - assets/images/
+
   fonts:
     - family: DBHelvethaica
       fonts:
@@ -77,3 +80,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:
+  android: "ic_launcher"
+  ios: false
+  image_path: "assets/images/ComShop1.png"

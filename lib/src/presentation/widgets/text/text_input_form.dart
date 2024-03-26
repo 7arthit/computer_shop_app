@@ -21,7 +21,7 @@ class TextInputForm extends StatelessWidget {
     this.maxLength,
     this.showCursor = true,
     this.readOnly = false,
-    this.style = const TextStyle(fontSize: 24, color: Colors.black),
+    this.style = const TextStyle(fontSize: 20, color: Colors.black),
     this.labelStyle,
     this.hintStyle,
     this.errorStyle,
@@ -95,13 +95,13 @@ class TextInputForm extends StatelessWidget {
             OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
               borderSide:
-              const BorderSide(color: Colors.blueAccent, width: 1.0),
+              const BorderSide(color: Colors.white, width: 1.0),
             ),
         enabledBorder: border ??
             OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
               borderSide:
-              const BorderSide(color: Colors.blueAccent, width: 1.0),
+              const BorderSide(color: Colors.white, width: 1.0),
             ),
         errorBorder: border ??
             OutlineInputBorder(

@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.appBarHeight = 64,
     this.iconBackColor = Colors.white,
-    this.backgroundColor = Colors.blueAccent,
+    this.backgroundColor = AppTheme.red,
   });
   final double appBarHeight;
   final String title;
@@ -52,3 +52,4 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(appBarHeight);
 }
+
