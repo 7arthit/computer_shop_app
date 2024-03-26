@@ -1,8 +1,7 @@
-import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:computer_shop_app/src/presentation/widgets/bottombar/bloc/bottom_bar_cubit.dart';
 import 'package:computer_shop_app/src/presentation/widgets/bottombar/models/bottom_models.dart';
 
@@ -60,7 +59,7 @@ class BottomBar extends StatelessWidget {
     final state = context.watch<BottomBarCubit>().state;
     if (item.menu == BottomMenu.home) {
       return Icon(
-        Icons.home,
+        Icons.list_alt,
         color: state.current == BottomMenu.home
             ? AppTheme.red
             : Colors.grey,

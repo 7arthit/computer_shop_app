@@ -1,14 +1,14 @@
-import 'package:computer_shop_app/src/config/app_storage.dart';
-import 'package:computer_shop_app/src/data/data_sources/helper/failure.dart';
-import 'package:computer_shop_app/src/domain/entities/role_drop_downs/role_drop_downs.dart';
-import 'package:computer_shop_app/src/domain/usecase/authentication_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-
 import 'package:injectable/injectable.dart';
-import '../models/login_models.dart';
+
+import 'package:computer_shop_app/src/config/app_storage.dart';
+import 'package:computer_shop_app/src/presentation/pages/login/models/login_models.dart';
+import 'package:computer_shop_app/src/data/data_sources/helper/failure.dart';
+import 'package:computer_shop_app/src/domain/entities/role/role_drop_downs.dart';
+import 'package:computer_shop_app/src/domain/usecase/authentication_usecase.dart';
 
 part 'login_state.dart';
 

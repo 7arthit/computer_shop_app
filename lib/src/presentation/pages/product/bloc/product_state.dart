@@ -2,6 +2,7 @@ part of 'product_cubit.dart';
 
 class ProductState extends Equatable {
   final List<Product> products;
+  final Search? searchProducts;
   final bool isLoading;
   final bool canSearch;
   final ProductSearch search;
@@ -9,9 +10,12 @@ class ProductState extends Equatable {
   final FormzSubmissionStatus status;
   final bool showProducts;
   final String searchText;
+  final int typeIdProducts;
+  final List<TypeDropDowns> productTypeItems;
 
   const ProductState({
     this.products = initialDataList,
+    this.searchProducts,
     this.isLoading = false,
     this.canSearch = false,
     this.search = const ProductSearch.pure(),
@@ -19,10 +23,13 @@ class ProductState extends Equatable {
     this.status = FormzSubmissionStatus.initial,
     this.showProducts = false,
     this.searchText = '',
+    this.typeIdProducts = 1,
+    this.productTypeItems = const [],
   });
 
   ProductState copyWith({
     List<Product>? products,
+    Search? searchProducts,
     bool? isLoading,
     bool? canSearch,
     ProductSearch? search,
@@ -30,9 +37,12 @@ class ProductState extends Equatable {
     FormzSubmissionStatus? status,
     bool? showProducts,
     String? searchText,
+    int? typeIdProducts,
+    List<TypeDropDowns>? productTypeItems,
   }) {
     return ProductState(
       products: products ?? this.products,
+      searchProducts: searchProducts ?? this.searchProducts,
       isLoading: isLoading ?? this.isLoading,
       canSearch: canSearch ?? this.canSearch,
       search: search ?? this.search,
@@ -40,9 +50,11 @@ class ProductState extends Equatable {
       status: status ?? this.status,
       showProducts: showProducts?? this.showProducts,
       searchText: searchText ?? this.searchText,
+      typeIdProducts: typeIdProducts ?? this.typeIdProducts,
+      productTypeItems: productTypeItems ?? this.productTypeItems
     );
   }
 
   @override
-  List<Object?> get props => [products, isLoading, canSearch, search, isValid, status];
+  List<Object?> get props => [products, searchProducts, isLoading, canSearch, search, isValid, status, typeIdProducts, productTypeItems];
 }

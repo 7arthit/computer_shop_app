@@ -1,7 +1,7 @@
-import 'package:computer_shop_app/src/config/app_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:computer_shop_app/src/config/app_storage.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:computer_shop_app/src/config/app_routes.dart';
 

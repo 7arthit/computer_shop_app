@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:computer_shop_app/src/config/app_routes.dart';
 import 'package:computer_shop_app/src/presentation/widgets/button/button_login.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
-import 'package:flutter/material.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);

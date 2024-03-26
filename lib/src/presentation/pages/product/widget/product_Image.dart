@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ImageScreenPage extends StatelessWidget {
+class ProductImage extends StatelessWidget {
   final String imageUrl;
 
-  const ImageScreenPage(BuildContext context,
-      {Key? key, required this.imageUrl})
+  const ProductImage(BuildContext context, {Key? key, required this.imageUrl})
       : super(key: key);
 
   @override

@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:computer_shop_app/src/data/data_sources/helper/exception.dart';
 import 'package:computer_shop_app/src/data/data_sources/helper/failure.dart';
 import 'package:computer_shop_app/src/data/data_sources/remote/rest_client.dart';
-import 'package:computer_shop_app/src/domain/entities/role_drop_downs/role_drop_downs.dart';
+import 'package:computer_shop_app/src/domain/entities/role/role_drop_downs.dart';
 import 'package:computer_shop_app/src/domain/repositories/authentication_repository.dart';
 
 @Injectable(as: AuthenticationRepository)
