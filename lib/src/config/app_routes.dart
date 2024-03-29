@@ -1,6 +1,3 @@
-import 'package:computer_shop_app/src/presentation/pages/auth/auth.dart';
-import 'package:computer_shop_app/src/presentation/pages/login/bloc/login_cubit.dart';
-import 'package:computer_shop_app/src/presentation/pages/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:computer_shop_app/src/utils/injection.dart';
@@ -12,6 +9,9 @@ import 'package:computer_shop_app/src/presentation/pages/profile/profile.dart';
 import 'package:computer_shop_app/src/presentation/pages/app/app.dart';
 import 'package:computer_shop_app/src/presentation/pages/landing/landing.dart';
 import 'package:computer_shop_app/src/presentation/widgets/bottombar/bloc/bottom_bar_cubit.dart';
+import 'package:computer_shop_app/src/presentation/pages/auth/auth.dart';
+import 'package:computer_shop_app/src/presentation/pages/login/bloc/login_cubit.dart';
+import 'package:computer_shop_app/src/presentation/pages/login/login.dart';
 
 class RouteNames {
   static const String landing = "/";

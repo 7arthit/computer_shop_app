@@ -1,11 +1,11 @@
-import 'package:computer_shop_app/src/config/app_storage.dart';
-import 'package:computer_shop_app/src/data/data_models/request/search_request.dart';
-import 'package:computer_shop_app/src/domain/entities/search/search.dart';
-import 'package:computer_shop_app/src/domain/entities/type/type_drop_downs.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:computer_shop_app/src/config/app_storage.dart';
+import 'package:computer_shop_app/src/data/data_models/request/search_request.dart';
+import 'package:computer_shop_app/src/domain/entities/search/search.dart';
+import 'package:computer_shop_app/src/domain/entities/type/type_drop_downs.dart';
 import 'package:computer_shop_app/src/data/data_sources/helper/exception.dart';
 import 'package:computer_shop_app/src/data/data_sources/helper/failure.dart';
 import 'package:computer_shop_app/src/data/data_sources/remote/rest_client.dart';
@@ -57,7 +57,7 @@ class DataProductRepository extends ProductRepository {
         form: SearchRequest(
             pageIndex: 1,
             pageSize: 2000,
-            sortField: '',
+            sortField: 'unit_price',
             sortOrder: -1,
             criteria: Criteria(
               productName: productName ?? '',
