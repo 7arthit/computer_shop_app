@@ -12,6 +12,7 @@ import 'package:computer_shop_app/src/presentation/widgets/bottombar/bloc/bottom
 import 'package:computer_shop_app/src/presentation/pages/auth/auth.dart';
 import 'package:computer_shop_app/src/presentation/pages/login/bloc/login_cubit.dart';
 import 'package:computer_shop_app/src/presentation/pages/login/login.dart';
+import 'package:computer_shop_app/src/presentation/pages/product_order/bloc/product_order_cubit.dart';
 
 class RouteNames {
   static const String landing = "/";
@@ -34,5 +35,6 @@ final routes = <String, WidgetBuilder>{
 final providers = <SingleChildWidget>[
   BlocProvider(create: (context) => getIt<BottomBarCubit>()),
   BlocProvider(create: (context) => getIt<ProductCubit>()),
+  BlocProvider(create: (context) => getIt<ProductOrderCubit>()),
   BlocProvider(create: (context) => getIt<LoginCubit>()),
 ];

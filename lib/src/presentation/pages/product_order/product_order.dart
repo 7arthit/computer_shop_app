@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
+import 'package:computer_shop_app/src/presentation/pages/product_order/bloc/product_order_cubit.dart';
+import 'package:computer_shop_app/src/presentation/pages/product_order/widget/product_order_list.dart';
 import 'package:computer_shop_app/src/presentation/widgets/text/mesage.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:computer_shop_app/src/presentation/pages/product_order/widget/product_order_toggle.dart';
@@ -61,17 +64,8 @@ class _ProductOrderPageState extends State<ProductOrderPage> with SingleTickerPr
             child: TabBarView(
               controller: _tabController,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
                     if (_tabController.index == 0)
-                      const Message(
-                          message: 'ไม่มีรายการสินค้า',
-                          icon: Icons.error_outline,
-                      ),
-                  ],
-                ),
+                      _productOrderList(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,6 +82,14 @@ class _ProductOrderPageState extends State<ProductOrderPage> with SingleTickerPr
           ),
         ],
       ),
+    );
+  }
+
+  Widget _productOrderList() {
+    return BlocBuilder<ProductOrderCubit, ProductOrderState>(
+      builder: (BuildContext context, ProductOrderState state) {
+          return const ProductOrderList();
+      },
     );
   }
 }

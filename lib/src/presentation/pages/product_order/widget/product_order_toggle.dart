@@ -6,7 +6,7 @@ class ProductOrderToggleTab extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const ProductOrderToggleTab({
+  const ProductOrderToggleTab({super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,
