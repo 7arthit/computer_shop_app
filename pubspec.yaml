@@ -46,6 +46,7 @@ dev_dependencies:
   retrofit_generator: ^8.0.4
   gap: ^3.0.0
   grouped_list: ^5.1.2
+  qr_flutter: ^4.0.0
 
 flutter:
 

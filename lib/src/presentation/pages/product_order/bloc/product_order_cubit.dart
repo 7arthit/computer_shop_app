@@ -17,13 +17,13 @@ class ProductOrderCubit extends Cubit<ProductOrderState> {
       ProductOrderItem(
         id: 1,
         name: 'VGA (การ์ดแสดงผล) POWERCOLOR FIGHTER AMD RADEON RX 6700 XT 12GB GDDR6 (AXRX 6700 XT 12GBD6-3DH)',
-        price: '17,100',
+        price: 17100,
         image: 'https://www.jib.co.th/img_master/product/medium/2022012914452251306_1.jpg?v=513061643625842',
       ),
      ProductOrderItem(
         id: 0,
         name: 'VGA (การ์ดแสดงผล) POWERCOLOR FIGHTER AMD RADEON RX 6700 XT 12GB GDDR6 (AXRX 6700 XT 12GBD6-3DH)',
-        price: '17,100',
+        price: 17100,
         image: 'https://www.jib.co.th/img_master/product/medium/2022012914452251306_1.jpg?v=513061643625842',
       ),
     ];

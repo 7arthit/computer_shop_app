@@ -9,7 +9,7 @@ import 'package:computer_shop_app/src/presentation/widgets/toggle/cumtom_toggle.
 import 'package:computer_shop_app/src/presentation/pages/product_order_history/product_order_history.dart';
 
 class ProductOrderPage extends StatefulWidget {
-  const ProductOrderPage({super.key});
+  const ProductOrderPage({Key? key}) : super(key: key);
 
   @override
   State<ProductOrderPage> createState() => _ProductOrderPageState();
@@ -64,10 +64,8 @@ class _ProductOrderPageState extends State<ProductOrderPage> with SingleTickerPr
             child: TabBarView(
               controller: _tabController,
               children: [
-                 if (_tabController.index == 0)
-                    _productOrderList(),
-                 if (_tabController.index == 1)
-                    const ProductOrderHistoryPage(),
+                _productOrderList(),
+                const ProductOrderHistoryPage(),
               ],
             ),
           ),
@@ -79,7 +77,7 @@ class _ProductOrderPageState extends State<ProductOrderPage> with SingleTickerPr
   Widget _productOrderList() {
     return BlocBuilder<ProductOrderCubit, ProductOrderState>(
       builder: (BuildContext context, ProductOrderState state) {
-          return const ProductOrderList();
+        return const ProductOrderList();
       },
     );
   }
