@@ -6,6 +6,7 @@ import 'package:computer_shop_app/src/presentation/widgets/button/button.dart';
 import 'package:computer_shop_app/src/presentation/widgets/text/text_input_form.dart';
 import 'package:computer_shop_app/src/presentation/widgets/text/text_label.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
+import 'package:computer_shop_app/src/presentation/pages/pay/widget/pay_qecode.dart';
 
 class PayForm extends StatelessWidget {
   final List<ProductOrderItem> orders;
@@ -127,7 +128,14 @@ class _PayScanButton extends StatelessWidget {
     return Button(
       text: "สแกนเพื่อชำระเงิน",
       style: AppButton.defaultButtonStyle,
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PayQRCode('data'),
+          ),
+        );
+      },
     );
   }
 }
