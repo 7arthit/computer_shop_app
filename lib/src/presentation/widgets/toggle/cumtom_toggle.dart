@@ -1,12 +1,12 @@
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class ProductOrderToggleTab extends StatelessWidget {
+class CustomToggleTab extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const ProductOrderToggleTab({super.key,
+  const CustomToggleTab({super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,
