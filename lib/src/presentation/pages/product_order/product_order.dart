@@ -4,9 +4,9 @@ import 'package:gap/gap.dart';
 
 import 'package:computer_shop_app/src/presentation/pages/product_order/bloc/product_order_cubit.dart';
 import 'package:computer_shop_app/src/presentation/pages/product_order/widget/product_order_list.dart';
-import 'package:computer_shop_app/src/presentation/widgets/text/mesage.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
-import 'package:computer_shop_app/src/presentation/pages/product_order/widget/product_order_toggle.dart';
+import 'package:computer_shop_app/src/presentation/widgets/toggle/cumtom_toggle.dart';
+import 'package:computer_shop_app/src/presentation/pages/product_order_history/product_order_history.dart';
 
 class ProductOrderPage extends StatefulWidget {
   const ProductOrderPage({super.key});
@@ -44,14 +44,14 @@ class _ProductOrderPageState extends State<ProductOrderPage> with SingleTickerPr
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ProductOrderToggleTab(
+              CustomToggleTab(
                 label: 'รายการสินค้า',
                 isSelected: _tabController.index == 0,
                 onTap: () {
                   _tabController.animateTo(0);
                 },
               ),
-              ProductOrderToggleTab(
+              CustomToggleTab(
                 label: 'ประวัติคำสั่งซื้อ',
                 isSelected: _tabController.index == 1,
                 onTap: () {
@@ -64,19 +64,10 @@ class _ProductOrderPageState extends State<ProductOrderPage> with SingleTickerPr
             child: TabBarView(
               controller: _tabController,
               children: [
-                    if (_tabController.index == 0)
-                      _productOrderList(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (_tabController.index == 1)
-                      const Message(
-                          message: 'ไม่มีประวัติคำสั่งซื้อ',
-                          icon: Icons.remove_shopping_cart_outlined,
-                      ),
-                  ],
-                ),
+                 if (_tabController.index == 0)
+                    _productOrderList(),
+                 if (_tabController.index == 1)
+                    const ProductOrderHistoryPage(),
               ],
             ),
           ),
