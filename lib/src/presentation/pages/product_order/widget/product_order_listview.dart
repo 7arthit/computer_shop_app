@@ -6,6 +6,8 @@ import 'package:computer_shop_app/src/presentation/pages/product_order/bloc/prod
 import 'package:computer_shop_app/src/presentation/widgets/button/app_button.dart';
 import 'package:computer_shop_app/src/presentation/widgets/button/button.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
+import 'package:computer_shop_app/src/presentation/pages/pay/pay.dart';
+import 'package:computer_shop_app/src/presentation/pages/product_order/model/product_order_model.dart';
 
 class ProductOrderListView extends StatelessWidget {
 
@@ -73,7 +75,10 @@ class ProductOrderListView extends StatelessWidget {
                               style: const TextStyle(fontSize: 16),
                             ),
                             subtitle: Text(
-                              order.price,
+                              '฿${order.price.toString().replaceAllMapped(
+                                RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                    (Match m) => '${m[1]},',
+                              )}',
                               style: const TextStyle(
                                 fontSize: 16.0,
                                 color: AppTheme.red,
@@ -88,7 +93,7 @@ class ProductOrderListView extends StatelessWidget {
                 },
               ),
             ),
-            _payProduct(),
+            _payProduct(context, state.order),
             const Gap(10),
           ],
         );
@@ -96,13 +101,17 @@ class ProductOrderListView extends StatelessWidget {
     );
   }
 
-  Widget _payProduct() {
+  Widget _payProduct(BuildContext context, List<ProductOrderItem> orders) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Button(
         text: "ชำระเงิน",
         style: AppButton.defaultButtonStyle,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => PayPage(orders: orders),
+          ));
+        },
       ),
     );
   }
