@@ -8,6 +8,7 @@ part 'bottom_bar_state.dart';
 
 List<BottomBarItem> menuItems = [
   BottomBarItem(BottomMenu.home, 'รายการ'),
+  BottomBarItem(BottomMenu.scan, 'แสกน'),
   BottomBarItem(BottomMenu.profile, 'โปรไฟล์'),
 ];
 
