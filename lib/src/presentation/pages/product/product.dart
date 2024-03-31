@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:computer_shop_app/src/presentation/pages/product/bloc/product_cubit.dart';
 import 'package:computer_shop_app/src/presentation/pages/product/widget/product_search.dart';
-import 'package:computer_shop_app/src/presentation/pages/product/widget/product_list.dart';
 import 'package:computer_shop_app/src/presentation/widgets/search/custom_search_appbar.dart';
+import 'package:computer_shop_app/src/presentation/pages/product_order/product_order.dart';
 import 'package:computer_shop_app/src/utils/constants/app_theme.dart';
 
 class ProductPage extends StatelessWidget {
@@ -32,10 +32,10 @@ class ProductPage extends StatelessWidget {
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (BuildContext context, ProductState state) {
         if (!state.canSearch) {
-          return const ProductList();
+          return const ProductOrderPage();
         } else {
           return state.showProducts
-              ? const ProductList()
+              ? const ProductOrderPage()
               : const ProductSearch();
         }
       },
