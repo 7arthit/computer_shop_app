@@ -24,44 +24,67 @@ class ProductOrderListView extends StatelessWidget {
                 itemCount: state.order.length,
                 itemBuilder: (context, index) {
                   final order = state.order[index];
-                  return Card(
-                      color: AppTheme.white,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 16.0,
+                  return Dismissible(
+                    key: Key(order.id.toString()),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      color: AppTheme.red,
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.only(right: 20.0),
+                      child: const Icon(
+                        Icons.delete,
+                        color: AppTheme.white,
                       ),
-                      elevation: 0.25,
-                      child: ListTile(
-                        leading: Image.network(
-                          order.image,
-                          width: 60.0,
-                          height: 60.0,
-                          fit: BoxFit.cover,
-                          errorBuilder: (
-                              BuildContext context,
-                              Object exception,
-                              StackTrace? stackTrace,
-                              ) {
-                            return Container(
+                    ),
+                    onDismissed: (direction) {
+                      if (direction == DismissDirection.endToStart) {
+                        context.read<ProductOrderCubit>().deleteOrder(order);
+                      }
+                    },
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(color: Colors.black12, width: 0.25),
+                          bottom: BorderSide(color: Colors.black12, width: 0.25),
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Image.network(
+                              order.image,
                               width: 60.0,
                               height: 60.0,
-                              color: AppTheme.white,
-                            );
-                          },
-                        ),
-                        title: Text(
-                          order.name,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        subtitle: Text(
-                          order.price,
-                          style: const TextStyle(
-                            fontSize: 16.0,
-                            color: AppTheme.red,
-                            fontWeight: FontWeight.bold,
+                              fit: BoxFit.cover,
+                              errorBuilder: (
+                                  BuildContext context,
+                                  Object exception,
+                                  StackTrace? stackTrace,
+                                  ) {
+                                return Container(
+                                  width: 60.0,
+                                  height: 60.0,
+                                  color: AppTheme.white,
+                                );
+                              },
+                            ),
+                            title: Text(
+                              order.name,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            subtitle: Text(
+                              order.price,
+                              style: const TextStyle(
+                                fontSize: 16.0,
+                                color: AppTheme.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    );
+                    ),
+                  );
                 },
               ),
             ),
