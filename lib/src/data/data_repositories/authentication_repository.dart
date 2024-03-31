@@ -1,9 +1,9 @@
-import 'package:computer_shop_app/src/data/data_models/request/login_request.dart';
-import 'package:computer_shop_app/src/data/data_models/response/login_response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:computer_shop_app/src/data/data_models/request/login_request.dart';
+import 'package:computer_shop_app/src/data/data_models/response/login_response.dart';
 import 'package:computer_shop_app/src/data/data_sources/helper/exception.dart';
 import 'package:computer_shop_app/src/data/data_sources/helper/failure.dart';
 import 'package:computer_shop_app/src/data/data_sources/remote/rest_client.dart';

@@ -1,5 +1,5 @@
 class AppConfig {
-  static const String domain = "http://202.28.34.197:9202/api";
+  static const String domain = "http://192.168.254.27:8080/api";
 }
 
 class ApiPath {

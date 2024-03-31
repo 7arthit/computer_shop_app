@@ -1,5 +1,6 @@
 enum BottomMenu {
   home,
+  scan,
   profile,
 }
 

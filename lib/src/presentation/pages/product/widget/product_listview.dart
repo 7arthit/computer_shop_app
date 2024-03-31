@@ -23,7 +23,7 @@ class ProductListView extends StatelessWidget {
           children: [
             Expanded(
               child: searchProducts.isEmpty
-                  ? const Message(message: 'ไม่พบสินค้า')
+                  ? const Message(message: 'ไม่พบสินค้า', icon: Icons.error_outline)
                   : ListView.builder(
                       itemCount: searchProducts.length,
                       itemBuilder: (context, index) {

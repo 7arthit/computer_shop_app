@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:computer_shop_app/src/presentation/pages/sacn/scan.dart';
 import 'package:computer_shop_app/src/presentation/pages/profile/profile.dart';
 import 'package:computer_shop_app/src/presentation/widgets/bottombar/bloc/bottom_bar_cubit.dart';
 import 'package:computer_shop_app/src/presentation/widgets/bottombar/bottom_bar.dart';
@@ -19,6 +20,7 @@ class _AppState extends State<AppPage> {
 
   final Map<BottomMenu, Widget> _pages = {
     BottomMenu.home: const ProductPage(),
+    BottomMenu.scan: const ScanPage(),
     BottomMenu.profile: const ProfilePage(),
   };
 
