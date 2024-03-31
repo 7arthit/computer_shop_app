@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Message extends StatelessWidget {
   final String message;
+  final IconData icon;
 
-  const Message({Key? key, required this.message}) : super(key: key);
+  const Message({Key? key, required this.message, required this.icon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class Message extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline, color: Colors.grey, size: 32),
+          Icon(icon, color: Colors.grey, size: 60),
           const SizedBox(width: 10, height: 10),
           Text(
             message,

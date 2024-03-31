@@ -66,6 +66,15 @@ class BottomBar extends StatelessWidget {
       );
     }
 
+    if (item.menu == BottomMenu.scan) {
+      return Icon(
+        Icons.qr_code_scanner_outlined,
+        color: state.current == BottomMenu.scan
+            ? AppTheme.red
+            : Colors.grey,
+      );
+    }
+
     if (item.menu == BottomMenu.profile) {
       return Icon(
         Icons.person,
