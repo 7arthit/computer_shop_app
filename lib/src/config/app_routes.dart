@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:computer_shop_app/src/utils/injection.dart';
 import 'package:provider/single_child_widget.dart';
 
+import 'package:computer_shop_app/src/presentation/pages/sacn/scan.dart';
 import 'package:computer_shop_app/src/presentation/pages/product/bloc/product_cubit.dart';
 import 'package:computer_shop_app/src/presentation/pages/product/product.dart';
 import 'package:computer_shop_app/src/presentation/pages/profile/profile.dart';
@@ -22,6 +23,7 @@ class RouteNames {
   static const String login = "/login";
   static const String home = "/home";
   static const String profile = "/profile";
+  static const String scan = "/scan";
 }
 
 final routes = <String, WidgetBuilder>{
@@ -31,6 +33,7 @@ final routes = <String, WidgetBuilder>{
   RouteNames.login: (context) => const LoginPage(),
   RouteNames.home: (context) => const ProductPage(),
   RouteNames.profile: (context) => const ProfilePage(),
+  RouteNames.scan: (context) => const ScanPage(),
 };
 
 final providers = <SingleChildWidget>[
